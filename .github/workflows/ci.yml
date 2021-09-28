@@ -19,6 +19,7 @@ jobs:
         uses: ludeeus/action-shellcheck@1.1.0
         with:
           severity: info
+          ignore: test
 
       - name: Test
         run: bats test/
