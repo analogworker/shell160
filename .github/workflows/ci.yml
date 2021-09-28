@@ -1,0 +1,25 @@
+name: "CI"
+on: [push, pull_request]
+jobs:
+  test:
+    name: lint and test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup BATS
+        uses: mig4/setup-bats@v1
+        with:
+          bats-version: 1.2.1
+
+      - name: Check out code and submodules
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Lint
+        uses: ludeeus/action-shellcheck@1.1.0
+        with:
+          severity: info
+          ignore: test
+
+      - name: Test
+        run: bats test/
